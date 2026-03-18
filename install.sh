@@ -5,29 +5,28 @@ sudo -v
 # Hide "last login" line when starting a new terminal session
 touch $HOME/.hushlogin
 
-
 #--------------------------------------------------
-# Oh my zsh installation
+# Shell setup
 #--------------------------------------------------
-echo -e "\nOh my zsh Installation"
-rm -rf $HOME/.oh-my-zsh
-curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh  &> /dev/null
+echo -e "\nSymlinking dotfiles"
+ln -sf $HOME/.dotfiles/.zshrc $HOME/.zshrc
+ln -sf $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
 
-echo -e "\nZSH Theme Installation"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.dotfiles/oh-my-zsh-custom/themes/powerlevel10k &> /dev/null
+mkdir -p $HOME/.config/starship
+ln -sf $HOME/.dotfiles/starship.toml $HOME/.config/starship.toml
 
-echo -e "\nZSH Plugins Installations"
-git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.dotfiles/oh-my-zsh-custom/plugins/zsh-autosuggestions &> /dev/null
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.dotfiles/oh-my-zsh-custom/plugins/zsh-syntax-highlighting &> /dev/null
+mkdir -p $HOME/.config/ghostty
+ln -sf $HOME/.dotfiles/ghostty/config $HOME/.config/ghostty/config
 
-echo -e "\nSymlinking zsh files"
-# Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
-rm -rf $HOME/.zshrc
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+mkdir -p $HOME/.config/nvim
+ln -sf $HOME/.dotfiles/nvim/* $HOME/.config/nvim/
 
-# Removes .p10k.zsh from $HOME (if it exists) and symlinks the .p10k.zsh file from the .dotfiles
-rm -rf $HOME/.p10k.zsh
-ln -s $HOME/.dotfiles/.p10k.zsh $HOME/.p10k.zsh
+mkdir -p $HOME/.config/karabiner
+ln -sf $HOME/.dotfiles/karabiner/karabiner.json $HOME/.config/karabiner/karabiner.json
+
+mkdir -p $HOME/.config/zed
+ln -sf $HOME/.dotfiles/zed/settings.json $HOME/.config/zed/settings.json
+ln -sf $HOME/.dotfiles/zed/keymap.json $HOME/.config/zed/keymap.json
 
 #--------------------------------------------------
 # macOS Apps and services
@@ -39,7 +38,6 @@ brew bundle
 # # install php extensions
 # pecl install xdebug
 
-
 # # Set default MySQL root password and auth type
 brew services start mysql # make sure mysql is running
 mysql -u root -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'root'; FLUSH PRIVILEGES;"
@@ -47,13 +45,13 @@ mysql -u root -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_passwor
 # # install default composer packages
 composer self-update
 composer global require laravel/installer
-composer global require laravel/valet
 
-# # Install Laravel Valet
-$HOME/.composer/vendor/bin/valet install
+# # install go tools
+go install github.com/lpheller/mogo@latest
 
 # # Create a default sites / projects directory
-mkdir $HOME/Sites
+mkdir -p $HOME/Sites
+mkdir -p $HOME/Projects
 
 # # configure git
 [ ! -f ~/.global.gitignore ] && ln -s ~/.dotfiles/.global.gitignore ~/.global.gitignore

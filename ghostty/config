@@ -1,0 +1,7 @@
+window-width = 150
+window-height = 25
+keybind = "global:super+ctrl+.=toggle_quick_terminal"
+adjust-cell-height = "30%"
+theme = "Catppuccin Macchiato"
+background-opacity = 0.95
+background-blur-radius = 40

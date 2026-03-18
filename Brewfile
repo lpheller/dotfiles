@@ -1,8 +1,4 @@
 # Taps
-tap 'homebrew/cask'
-tap 'homebrew/cask-fonts'
-tap 'homebrew/bundle'
-tap 'nicoverbruggen/homebrew-cask'
 
 ##
 # Binaries
@@ -18,28 +14,27 @@ brew 'dockutil'
 # Development
 ##
 brew 'git'
-brew 'php'
-brew 'php@8.0'
-brew 'php@7.4'
+brew 'go'
 brew 'composer'
 brew 'mysql'
-brew 'nginx'
 
-brew 'node@14'
-brew 'npm'
+brew 'node@24'
 brew 'nvm'
 
 brew 'neovim'
+brew 'eza'
+brew 'fd'
+brew 'fzf'
+brew 'lazygit'
+brew 'starship'
+brew 'zsh-autosuggestions'
+brew 'zsh-syntax-highlighting'
 
 cask 'docker'
-cask 'iterm2'
+cask 'ghostty'
+cask 'herd'
 cask 'visual-studio-code'
-cask 'insomnia'
-cask 'phpmon'
-cask 'sequel-ace'
 cask 'tableplus'
-cask 'logseq'
-cask 'warp'
 cask 'raycast'
 
 
@@ -48,8 +43,6 @@ cask 'raycast'
 ##
 cask '1password'
 cask 'google-chrome'
-cask 'slack'
-cask 'tiles'
 cask 'keka'
 cask 'spotify'
 cask 'signal'

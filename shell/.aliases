@@ -1,19 +1,16 @@
 # Composer Alias
 alias composer="COMPOSER_MEMORY_LIMIT=-1 composer"
 alias cda="composer dumpautoload"
-alias ccc="composer clear-cache"
-alias gcomposer="code ~/.composer"
 
 # ZSH Shortcuts
-alias zshconfig="code ~/.zshrc"
 alias reload="source ~/.zshrc"
-alias dotfiles="code ~/.dotfiles"
 
 
 ## Laravel
 alias pa="php artisan"
 alias paca="pa cache:clear && pa route:clear && pa config:clear && pa view:clear"
 alias mfs="php artisan migrate:fresh --seed"
+alias mf="php artisan migrate:fresh"
 
 ## docker
 alias dc="docker-compose"
@@ -23,24 +20,69 @@ alias doker-composer="docker-compose"
 ## Git
 alias wip="git add . && git commit -m \"wip\" && git push"
 alias nah="git reset --hard && git clean -df"
+alias gmmic="git checkout main && git pull && git checkout - && git merge main" # git merge main into current (branch)
+alias btm="git checkout main && git pull" # back to main
+alias ghb="gh browse"
 
 ## Symfony
-alias symfony="bin/console"
+# alias symfony="bin/console"
 alias bc="bin/console"
 
 ## NPM
 alias nrw="npm run watch"
 alias nrp="npm run prod"
 alias nrd="npm run dev"
+alias nerd="npm run dev"
 
 ## PHPunit
 alias phpunit="vendor/bin/phpunit"
 alias pu="vendor/bin/phpunit"
 alias pf="clear && phpunit --filter"
-alias puf="clear && phpunit --filter"
 
 #misc
 alias cpenv="cp .env.example .env"
-alias grep="grep -n --color"
+# alias grep="grep -n --color"
 alias del="rm -rf"
-alias sshkey="cat ~/.ssh/id_rsa.pub | pbcopy"
+alias sshkey="cat ~/.ssh/id_ed25519.pub | pbcopy"
+
+## Vim
+alias vi="nvim"
+alias nv="nvim"
+alias vim="nvim"
+
+
+alias lg="lazygit"
+
+alias pest="vendor/bin/pest"
+alias stan="vendor/bin/phpstan"
+alias psalm="vendor/bin/psalm"
+alias pint="vendor/bin/pint"
+
+alias pep="vendor/bin/pest --parallel"
+
+
+# quick find and open files in nvim
+alias v="fd --type f --hidden --exclude .git| fzf-tmux -p --reverse | xargs nvim"
+
+
+alias projects="cd ~/Projects && clear"
+alias dotfiles="cd ~/.dotfiles"
+alias sites="cd ~/Sites"
+
+
+
+
+alias oc="opencode"
+
+
+
+
+
+# alias ls to exa nur in interaktiven Shells
+if [[ $- == *i* ]]; then
+    alias ls='eza'
+    # Einfaches Verzeichnislisting
+    alias l='eza --icons --group'
+    # Klassischer ll (lange Liste, alle Dateien, typ‑Markierungen)
+    alias ll='eza -alF --icons --group'
+fi

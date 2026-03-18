@@ -1,46 +1,35 @@
-function config () {
-    if [[ $1 == "functions" ]]; then
-        code ~/.dotfiles/shell/.functions
-    fi
-    if [[ $1 == "aliases" ]]; then
-        code ~/.dotfiles/shell/.aliases
-    fi
-    if [[ $1 == "zsh" ]]; then
-        code ~/.zshrc
-    fi
+#!/usr/bin/env bash
+
+p() {
+  local dir
+  dir=$(ls ~/Projects | fzf +s) && cd ~/Projects/"$dir"
 }
+
 
 function silent() {
-   "$@" >& /dev/null
+  "$@" >&/dev/null
 }
-
-function opendb () {
-   [ ! -f .env ] && { echo "No .env file found."; exit 1; }
-
-   DB_CONNECTION=$(grep DB_CONNECTION .env | grep -v -e '^\s*#' | cut -d '=' -f 2-)
-   DB_HOST=$(grep DB_HOST .env | grep -v -e '^\s*#' | cut -d '=' -f 2-)
-   DB_PORT=$(grep DB_PORT .env | grep -v -e '^\s*#' | cut -d '=' -f 2-)
-   DB_DATABASE=$(grep DB_DATABASE .env | grep -v -e '^\s*#' | cut -d '=' -f 2-)
-   DB_USERNAME=$(grep DB_USERNAME .env | grep -v -e '^\s*#' | cut -d '=' -f 2-)
-   DB_PASSWORD=$(grep DB_PASSWORD .env | grep -v -e '^\s*#' | cut -d '=' -f 2-)
-
-   DB_URL="${DB_CONNECTION}://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}"
-
-    if [ $DB_CONNECTION = "sqlite" ]; then
-        echo "Opening database/database.sqlite"
-        open "database/database.sqlite"
-    else
-        echo "Opening ${DB_URL}"
-        open $DB_URL
-    fi
-}
-
 
 function tinker() {
-  if [ -z "$1" ]
-    then
-       php artisan tinker
-    else
-       php artisan tinker --execute="dd($1);"
+  if [ -z "$1" ]; then
+    php artisan tinker
+  else
+    php artisan tinker --execute="dd($1);"
   fi
 }
+
+function pw:secret {
+  pw=$(php artisan tinker --execute="echo bcrypt('secret')")
+  echo "$pw" | pbcopy && echo "secret copied to clipboard"
+}
+
+function lupdater {
+  local bin=~/Projects/laravel-updater/bin/updater
+  if [[ ! -f "$bin" ]]; then
+    echo "laravel-updater not found. Run:"
+    echo "  git clone https://github.com/lpheller/laravel-updater ~/Projects/laravel-updater"
+    return 1
+  fi
+  php "$bin" "$@"
+}
+

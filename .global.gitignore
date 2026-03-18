@@ -1,9 +1,11 @@
 .idea/
 *.iml
-*.lock
 # vendor/
 node_modules/
+.vscode/
 .env
 .DS_Store
 .phpunit.result.cache
+.phpunit.cache
 composer.phar
+**/.claude/settings.local.json

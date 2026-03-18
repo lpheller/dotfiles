@@ -2,12 +2,30 @@
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-# Always enable colored `grep` output
-export GREP_OPTIONS="--color=auto"
-
 # Do not auto update brew
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 # NVM installed from bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+
+# Go
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+
+
+# Composer
+export PATH=$HOME/.composer/vendor/bin:$PATH
+
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# MySQL
+export PATH="/opt/homebrew/opt/mysql@8.4/bin:$PATH"
+
+# opencode
+export PATH=$HOME/.opencode/bin:$PATH
